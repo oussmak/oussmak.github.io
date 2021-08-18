@@ -664,6 +664,8 @@ canvas {
 </style>
 
 <script type="text/javascript">
+var lastX;
+var marginLeft = 0;
 
 var canvasDots = function() {
   var canvas = document.querySelector("canvas"),
@@ -676,6 +678,7 @@ var canvasDots = function() {
   ctx.fillStyle = colorDot;
   ctx.lineWidth = 0.1;
   ctx.strokeStyle = color;
+var dragging = false;
 
   var mousePosition = {
     x: 30 * canvas.width / 100,
@@ -698,6 +701,20 @@ var canvasDots = function() {
 
     this.radius = Math.random();
   }
+
+  window.addEventListener('scroll', function(e) {
+    var evt = e || event;
+    dragging = true;
+    lastX = evt.clientX;
+    e.preventDefault();
+}, false);
+
+
+
+window.addEventListener('scroll', function() {
+    dragging = false;
+}, false);
+
 
   Dot.prototype = {
     create: function() {
@@ -790,7 +807,7 @@ window.onload = function() {
 
 
 
-</head><body id="myouss">
+</head><body id="myouss" style="overflow: scroll;">
 
 
 <canvas class='connecting-dots' width="100%" height="100%"></canvas>
