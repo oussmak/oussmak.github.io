@@ -1,4 +1,5 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cronos</title><style>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cronos</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -13,6 +14,9 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+	background-color: black;
+	color: white !important; 
+	font-size: 15px !important;
 }
 @media only screen {
 	body {
@@ -633,7 +637,175 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="3a6067c9-7c98-4776-9329-ebd19c011a0c" class="page mono"><header><div class="page-header-icon undefined"><span class="icon">⏲️</span></div><h1 class="page-title">Cronos</h1></header><div class="page-body"><h1 id="099adb33-78b4-48f8-a00d-4d9b04e2897a" class="">Recon &amp; Enum</h1><pre id="0b72af6c-a8ea-43ae-8c32-24d5f0ca2dbe" class="code code-wrap"><code># Nmap 7.91 scan initiated Tue May 11 10:25:40 2021 as: nmap -sC -sV -v -oN nmap/initial 10.10.10.13
+</style>
+
+
+<style type="text/css">* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 10px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  line-height: 150%;
+}
+
+
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+</style>
+
+<script type="text/javascript">
+
+var canvasDots = function() {
+  var canvas = document.querySelector("canvas"),
+    ctx = canvas.getContext("2d"),
+    colorDot = "#FFFFFF",
+    color = "#FFFFFF";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.display = "block";
+  ctx.fillStyle = colorDot;
+  ctx.lineWidth = 0.1;
+  ctx.strokeStyle = color;
+
+  var mousePosition = {
+    x: 30 * canvas.width / 100,
+    y: 30 * canvas.height / 100
+  };
+
+  var dots = {
+    nb: 600,
+    distance: 60,
+    d_radius: 1000000,
+    array: []
+  };
+
+  function Dot() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+
+    this.vx = -0.5 + Math.random();
+    this.vy = -0.5 + Math.random();
+
+    this.radius = Math.random();
+  }
+
+  Dot.prototype = {
+    create: function() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      ctx.fill();
+    },
+
+    animate: function() {
+      for (i = 0; i < dots.nb; i++) {
+        var dot = dots.array[i];
+
+        if (dot.y < 0 || dot.y > canvas.height) {
+          dot.vx = dot.vx;
+          dot.vy = -dot.vy;
+        } else if (dot.x < 0 || dot.x > canvas.width) {
+          dot.vx = -dot.vx;
+          dot.vy = dot.vy;
+        }
+        dot.x += dot.vx;
+        dot.y += dot.vy;
+      }
+    },
+
+    line: function() {
+      for (i = 0; i < dots.nb; i++) {
+        for (j = 0; j < dots.nb; j++) {
+          i_dot = dots.array[i];
+          j_dot = dots.array[j];
+
+          if (
+            i_dot.x - j_dot.x < dots.distance &&
+            i_dot.y - j_dot.y < dots.distance &&
+            i_dot.x - j_dot.x > -dots.distance &&
+            i_dot.y - j_dot.y > -dots.distance
+          ) {
+            if (
+              i_dot.x - mousePosition.x < dots.d_radius &&
+              i_dot.y - mousePosition.y < dots.d_radius &&
+              i_dot.x - mousePosition.x > -dots.d_radius &&
+              i_dot.y - mousePosition.y > -dots.d_radius
+            ) {
+              ctx.beginPath();
+              ctx.moveTo(i_dot.x, i_dot.y);
+              ctx.lineTo(j_dot.x, j_dot.y);
+              ctx.stroke();
+              ctx.closePath();
+            }
+          }
+        }
+      }
+    }
+  };
+
+  function createDots() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (i = 0; i < dots.nb; i++) {
+      dots.array.push(new Dot());
+      dot = dots.array[i];
+
+      dot.create();
+    }
+
+    dot.line();
+    dot.animate();
+  }
+
+  window.onmousemove = function(parameter) {
+    mousePosition.x = parameter.pageX;
+    mousePosition.y = parameter.pageY;
+  };
+
+  mousePosition.x = window.innerWidth / 2;
+  mousePosition.y = window.innerHeight / 2;
+
+  setInterval(createDots, 1000 / 30);
+};
+
+
+window.onload = function() {
+  canvasDots();
+};
+
+
+</script>
+
+<script type="text/javascript">
+var B = document.body,
+    H = document.documentElement,
+    height
+
+if (typeof document.height !== 'undefined') {
+    height = document.height // For webkit browsers
+} else {
+    height = Math.max( B.scrollHeight, B.offsetHeight,H.clientHeight, H.scrollHeight, H.offsetHeight );
+}
+console.log(height);
+</script>
+
+
+
+
+
+</head><body id="myouss">
+
+
+<canvas class='connecting-dots' width="100%" height="100%"></canvas>
+	<article id="3a6067c9-7c98-4776-9329-ebd19c011a0c" class="page mono"><header><div class="page-header-icon undefined"><span class="icon">⏲️</span></div><h1 class="page-title">Cronos</h1></header><div class="page-body"><h1 id="099adb33-78b4-48f8-a00d-4d9b04e2897a" class="">Recon &amp; Enum</h1><pre id="0b72af6c-a8ea-43ae-8c32-24d5f0ca2dbe" class="code code-wrap"><code># Nmap 7.91 scan initiated Tue May 11 10:25:40 2021 as: nmap -sC -sV -v -oN nmap/initial 10.10.10.13
 Nmap scan report for 10.10.10.13
 Host is up (0.042s latency).
 Not shown: 997 filtered ports

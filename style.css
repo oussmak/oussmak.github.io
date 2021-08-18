@@ -1,0 +1,148 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-rendering: geometricPrecision;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 100%;
+}
+
+body {
+    /* fallback */
+    background-color: #1a82f7;
+    background-image: url('http://www.zastavki.com/pictures/originals/2015/Nature___Forest_Trees_without_leaves_on_a_background_of_stars_098901_.jpg');
+    overflow: hidden;
+    background-repeat: repeat-y;
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, left top, right top, from(#0D47A1), to(#263238));
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(left bottom, #263238, #0D47A1);
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(left bottom, #263238, #0D47A1);
+    /* IE 10 */
+    background: -ms-linear-gradient(left bottom, #263238, #0D47A1);
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(left bottom, #263238, #0D47A1);
+}
+
+.container {
+    margin-top: 2.5%;
+    margin-left: 5%;
+    background-color: #2E2B41;
+    height: 90%;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 5px 10px 50px #000;
+}
+
+#header {
+    background-color: #47415F;
+    min-height: 7.5%;
+    max-height: 7.5%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    color: rgb(98, 95, 132);
+    font-size: 15px;
+    padding: 0 10px;
+    z-index: 99;
+}
+
+#header:hover {
+    cursor: initial;
+}
+
+#header .col-xs-2,
+#header .col-md-1 {
+    -webkit-transition: all 250ms;
+    transition: all 250ms;
+}
+
+#header .col-xs-2:hover,
+#header .col-md-1:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+#content {
+    min-height: 92.5%;
+    max-height: 92.5%;
+}
+
+#content::after {
+    background: url('http://rnestheticsandlaser.com/Portals/17/Skins/Generic2/StyleSwitcher/img/patterns/transparent/grid/grid3.png');
+    opacity: 0.1;
+    top: 10%;
+    left: 5%;
+    position: absolute;
+    width: 90%;
+    height: 85%;
+    z-index: -1;
+}
+
+#demo-canvas {
+    position: absolute;
+    top: 12.2%;
+    left: 5%;
+}
+
+#main-content {
+    margin-top: 15%;
+    font-size: 50px;
+    width: 100%;
+    opacity: 0.5;
+}
+
+#action {
+    width: 100%;
+    margin-top: 50px;
+}
+
+#contact-me {
+    width: 100%;
+    padding: 15px 5px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    transition: all 250ms;
+    -webkit-transition: all 250ms;
+    outline: none;
+}
+
+#contact-me:hover {
+    color: #263238;
+    background-color: #fff;
+}
+
+.delay-250 {
+    animation-delay: 500ms;
+    -webkit-animation-delay: 500ms;
+}
+
+#contacts {
+    position: fixed;
+    top: 17.5%;
+    left: 6.3%;
+    width: 90%;
+}
+
+#contacts .col-xs-12 {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+#contacts form {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
